@@ -2,4 +2,11 @@
     <string name="app_name">MeteringApp</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="lux">Lux</string>
+    <string name="lux_standard_value">0</string>
+    <string name="lux_max_label">Max</string>
+    <string name="lux_min_label">Min</string>
+    <string name="lux_save_button">Save max</string>
+    <string name="lux_reset_button">Reset</string>
+    <string name="lux_lightsensor_not_available">Light Sensor not available</string>
 </resources>
