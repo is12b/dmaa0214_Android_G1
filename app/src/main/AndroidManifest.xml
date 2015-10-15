@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dk.ucn.dmaa0214.group1.meteringapp" >
-
+<!-- TODO required sensors! -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,6 +15,23 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".TiltAngleActivity"
+            android:label="@string/title_activity_tilt_angle"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dk.ucn.dmaa0214.group1.meteringapp.MainActivity" />
+        </activity>
+        <activity
+            android:name=".LuxActivity"
+            android:label="@string/title_activity_lux"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dk.ucn.dmaa0214.group1.meteringapp.MainActivity" />
         </activity>
     </application>
 

@@ -9,4 +9,13 @@
     <string name="lux_save_button">Save max</string>
     <string name="lux_reset_button">Reset</string>
     <string name="lux_lightsensor_not_available">Light Sensor not available</string>
+    <string name="title_activity_tilt_angle">TiltAngleActivity</string>
+    <string name="angle">Angle</string>
+    <string name="angle_button_save">Save</string>
+    <string name="title_activity_lux">LuxActivity</string>
+    <string name="main_lux_button">Get Lux</string>
+    <string name="main_lux">Measured lux: 0</string>
+    <string name="main_angle_button">Get Angle</string>
+    <string name="main_angle">Measured angle: 0</string>
+    <string name="main_lux_formatted">Measured lux: %1$s</string>
 </resources>

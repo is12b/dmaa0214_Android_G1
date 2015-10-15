@@ -1,0 +1,29 @@
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+    tools:showIn="@layout/activity_tilt_angle"
+    tools:context="dk.ucn.dmaa0214.group1.meteringapp.TiltAngleActivityFragment">
+    >
+
+    <TextView
+        android:background="@color/dark_dark_blue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/angle"
+        android:id="@+id/angle_textview_current"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:textSize="40sp"
+        android:padding="40dp"/>
+
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="@string/angle_button_save"
+         android:id="@+id/angle_button_save"/>
+
+</LinearLayout>

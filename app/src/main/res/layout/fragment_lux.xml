@@ -2,87 +2,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivityFragment"
+    tools:showIn="@layout/activity_lux"
+    tools:context=".LuxActivityFragment"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:background="@color/main_background"
     >
 
-    <TextView
-        android:background="@color/dark_dark_blue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/lux"
-        android:id="@+id/lux_textview_current"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:textSize="40sp"
-        android:padding="40dp"/>
-
-    <GridLayout
-        android:background="@color/dark_blue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:columnCount="2"
-        android:rowCount="2"
-        android:columnOrderPreserved="false"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:layout_marginBottom="20dp">
-
         <TextView
+            android:background="@color/dark_dark_blue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/lux"
+            android:id="@+id/lux_textview_current"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:textSize="40sp"
+            android:padding="40dp"/>
 
+        <GridLayout
+            android:background="@color/dark_blue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lux_max_label"
-            style="@style/lux_grid_textview"
-            />
+            android:columnCount="2"
+            android:rowCount="2"
+            android:columnOrderPreserved="false"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginBottom="20dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lux_standard_value"
-            android:id="@+id/lux_textview_max"
-            style="@style/lux_grid_textview" />
+            <TextView
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lux_min_label"
-            style="@style/lux_grid_textview" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lux_max_label"
+                style="@style/lux_grid_textview"
+                />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lux_standard_value"
-            android:id="@+id/lux_textview_min"
-            style="@style/lux_grid_textview" />
-    </GridLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lux_standard_value"
+                android:id="@+id/lux_textview_max"
+                style="@style/lux_grid_textview" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lux_min_label"
+                style="@style/lux_grid_textview" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lux_reset_button"
-            android:id="@+id/button"
-            android:layout_marginRight="20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lux_standard_value"
+                android:id="@+id/lux_textview_min"
+                style="@style/lux_grid_textview" />
+        </GridLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lux_save_button"
-            android:id="@+id/button2"
-            android:layout_marginLeft="20dp" />
-    </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lux_reset_button"
+                android:id="@+id/lux_button_reset"
+                android:layout_marginRight="20dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lux_save_button"
+                android:id="@+id/lux_button_save"
+                android:layout_marginLeft="20dp" />
+        </LinearLayout>
 
 
 </LinearLayout>
