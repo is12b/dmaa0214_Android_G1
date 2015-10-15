@@ -70,10 +70,32 @@ public class TiltAngleActivity extends AppCompatActivity {
                 String str = "result: " + mValuesOrientation[0] + " " +
                         mValuesOrientation[1] + " " +
                         mValuesOrientation[2];
-                double test = Math.toDegrees(mValuesOrientation[0]);
-                int rotation = (int) Math.round(Math.toDegrees(Math.atan2(mValuesOrientation[0], mValuesOrientation[1])));
-                current_textView.setText(str + "\n" + rotation);
+
+                double xAxisData = mValuesOrientation[0];
+                double yAxisData = mValuesOrientation[1];
+                double zAxisData = mValuesOrientation[2];
+                //--Convert raw 0.0 ~ 1.0 sensor datad to degrees.
+                double xAngle = Math.atan(xAxisData / (Math.sqrt((yAxisData * yAxisData)) + (zAxisData * zAxisData)));
+                double yAngle = Math.atan(yAxisData / (Math.sqrt((xAxisData * xAxisData) +  (zAxisData * zAxisData))));
+                double zAngle = Math.atan(Math.sqrt((xAxisData * xAxisData) + (yAxisData * yAxisData)) / zAxisData);
+                xAngle = xAngle * 180.00;
+                yAngle = yAngle * 180.00;
+                zAngle = zAngle * 180.00;
+                xAngle = xAngle / 3.141592;
+                yAngle = yAngle / 3.141592;
+                zAngle = zAngle / 3.141592;
+
+                str = "result: " + xAngle + " " +
+                        yAngle + " " +
+                        zAngle;
+
+                current_textView.setText(str);
             }
+
+            private double square(double ay) {
+                return Math.sqrt(ay);
+            }
+
         });
 
     }
