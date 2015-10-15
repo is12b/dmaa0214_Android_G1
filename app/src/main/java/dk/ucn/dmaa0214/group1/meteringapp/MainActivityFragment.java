@@ -17,6 +17,7 @@ public class MainActivityFragment extends Fragment {
     private TextView textView_lux;
     private TextView textView_angle;
     private static final int LUX_REQUEST_CODE = 1001;
+    private static final int ANGLE_REQUEST_CODE = 1002;
     public static final String LUX_VALUE = "LUX_VALUE";
 
     public MainActivityFragment() {
@@ -48,7 +49,8 @@ public class MainActivityFragment extends Fragment {
         button_angle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), TiltAngleActivity.class);
+                startActivityForResult(intent, ANGLE_REQUEST_CODE);
             }
         });
     }
