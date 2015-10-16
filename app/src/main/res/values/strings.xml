@@ -18,4 +18,5 @@
     <string name="main_angle_button">Get Angle</string>
     <string name="main_angle">Measured angle: 0</string>
     <string name="main_lux_formatted">Measured lux: %1$s</string>
+    <string name="angle_button_calibrate">calibrate</string>
 </resources>
