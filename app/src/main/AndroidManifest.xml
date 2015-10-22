@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dk.ucn.dmaa0214.group1.meteringapp" >
-<!-- TODO required sensors! -->
+
+    <!-- TODO required sensors! -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -32,6 +33,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="dk.ucn.dmaa0214.group1.meteringapp.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Calibrate"
+            android:label="@string/title_activity_calibrate" >
         </activity>
     </application>
 

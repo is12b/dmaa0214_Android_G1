@@ -19,6 +19,7 @@ public class MainActivityFragment extends Fragment {
     private static final int LUX_REQUEST_CODE = 1001;
     private static final int ANGLE_REQUEST_CODE = 1002;
     public static final String LUX_VALUE = "LUX_VALUE";
+    public static final String ANGLE_VALUE = "ANGLE_VALUE";
 
     public MainActivityFragment() {
     }
@@ -58,6 +59,11 @@ public class MainActivityFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ANGLE_REQUEST_CODE && resultCode == getActivity().RESULT_OK) {
+            String angle = data.getStringExtra(ANGLE_VALUE);
+            textView_angle.setText(String.format(getResources().getString(R.string.main_angle_formatted),
+                    angle));
+        }
         if (requestCode == LUX_REQUEST_CODE && resultCode == getActivity().RESULT_OK) {
             String lux = data.getStringExtra(LUX_VALUE);
             textView_lux.setText(String.format(getResources().getString(R.string.main_lux_formatted),

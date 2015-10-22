@@ -1,5 +1,8 @@
 package dk.ucn.dmaa0214.group1.meteringapp;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -15,15 +18,11 @@ import android.widget.TextView;
 
 public class TiltAngleActivity extends AppCompatActivity {
 
-    final float[] mValuesMagnet = new float[3];
-    final float[] mValuesAccel = new float[3];
-    final float[] mValuesOrientation = new float[3];
-    final float[] mRotationMatrix = new float[9];
-    private Button btn_calibrate;
+   // private Button btn_calibrate;
     private Button btn_save;
     private TextView current_textView;
     private SensorEventListener mEventListener;
-    private float FlatAngle;
+    public static int calibrateAngle;
 
 
     @Override
@@ -46,22 +45,30 @@ public class TiltAngleActivity extends AppCompatActivity {
 
 
         btn_save = (Button) findViewById(R.id.angle_button_save);
-        btn_calibrate = (Button) findViewById(R.id.angle_button_calibrate);
+        //btn_calibrate = (Button) findViewById(R.id.angle_button_calibrate);
         current_textView = (TextView) findViewById(R.id.angle_textview_current);
 
         mEventListener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent event) {
-                switch (event.sensor.getType()) {
-                    case Sensor.TYPE_ACCELEROMETER :
-                        System.arraycopy(event.values, 0, mValuesAccel, 0 , 3);
-                        break;
-                    case Sensor.TYPE_MAGNETIC_FIELD :
-                        System.arraycopy(event.values, 0, mValuesMagnet, 0, 3);
-                        break;
+                float[] values = fixValues(event);
+
+                int i = (int)(double)(int)((180D * Math.atan(values[0] / values[1]) / 3.1415926535897931D));
+
+                int l = i - calibrateAngle;
+                int j = l;
+
+                if(l > 90){
+                    j = 90;
                 }
 
-                methodForEvent(event);
+                if(Math.abs(values[3]) < 0.9F){
+                    current_textView.setText(Integer.toString(Math.abs(j)));
+                    return;
+                } else {
+                    current_textView.setText("---");
+                    return;
+                }
 
             }
 
@@ -71,116 +78,62 @@ public class TiltAngleActivity extends AppCompatActivity {
             }
         };
 
-        setListners(sensorManager, mEventListener);
-
+        sensorManager.registerListener(mEventListener, sensorManager.getDefaultSensor(1) , 3);
+/*
         btn_calibrate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FlatAngle = playerAngle;
+                Intent intent = new Intent(TiltAngleActivity.this, Calibrate.class);
+                startActivity(intent);
             }
         });
-
+*/
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Angle", current_textView.getText());
+                clipboard.setPrimaryClip(clip);
 
-                String str = getSecondTry();//getFirstTry();
-
-                current_textView.setText(str);
+                Intent output = new Intent();
+                output.putExtra(MainActivityFragment.ANGLE_VALUE, current_textView.getText());
+                setResult(RESULT_OK, output);
+                finish();
             }
         });
 
     }
 
-    static final float ALPHA = 0.2f;
-    //http://stackoverflow.com/questions/4611599/help-smoothing-data-from-a-sensor
-    protected float[] lowPass( float[] input, float[] output ) {
-        if ( output == null ) return input;
+    private float[] fixValues(SensorEvent event){
+        float[] ret = new float[4];
 
-        for ( int i=0; i<input.length; i++ ) {
-            output[i] = output[i] + ALPHA * (input[i] - output[i]);
+        float x = event.values[0] / 9.8F;
+        float y = event.values[1] / 9.8F;
+        float z = event.values[2] / 9.8F;
+        float f = x;
+
+        if (x == 0.0F){
+            f = 0.01F;
         }
-        return output;
-    }
 
-    private String getSecondTry() {
-        int a = Math.round(FlatAngle);
-        int b = Math.round(playerAngle);
+        x = y;
 
-        int r = (a - b) % 360;
-
-        float angle = playerAngle-FlatAngle;
-
-        return "flat: " + FlatAngle + "\nplayerAngle: " + playerAngle + "\nAngle: " +angle +
-                "\nr: " + r;
-    }
-
-
-    private float[] mGravity;
-    private float[] mGeomagnetic;
-    private float playerAngle;
-
-    private float[] orientation;
-
-    private void methodForEvent(SensorEvent event) {
-
-        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
-            mGravity = lowPass(event.values, mGravity);
-        if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
-            mGeomagnetic = lowPass(event.values, mGeomagnetic);
-        if (mGravity != null && mGeomagnetic != null) {
-            float R[] = new float[9];
-            float I[] = new float[9];
-
-            boolean success = SensorManager.getRotationMatrix(R, I, mGravity, mGeomagnetic);
-            if (success) {
-                float[] orientationNew = new float[3];
-                SensorManager.getOrientation(R, orientationNew);
-                orientation = lowPass(orientationNew, orientation);
-                playerAngle = (float) Math.toDegrees(Math.atan2(orientation[1], orientation[0]));
-
-            }
+        if (y == 0.0F){
+            x = 0.01F;
         }
+
+        y = z;
+
+        if (z == 0.0F){
+            y = 0.01F;
+        }
+
+        ret[0] = x;
+        ret[1] = y;
+        ret[2] = z;
+        ret[3] = f;
+
+        return ret;
     }
 
-    private void setListners(SensorManager sensorManager, SensorEventListener mEventListener) {
-        sensorManager.registerListener(mEventListener,
-                sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-                SensorManager.SENSOR_DELAY_NORMAL);
-        sensorManager.registerListener(mEventListener,
-                sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD),
-                SensorManager.SENSOR_DELAY_NORMAL);
-    }
-
-
-
-
-    public String getFirstTry() {
-        SensorManager.getRotationMatrix(mRotationMatrix, null, mValuesAccel, mValuesMagnet);
-        SensorManager.getOrientation(mRotationMatrix, mValuesOrientation);
-        String str = "result: " + mValuesOrientation[0] + " " +
-                mValuesOrientation[1] + " " +
-                mValuesOrientation[2];
-
-        double xAxisData = mValuesOrientation[0];
-        double yAxisData = mValuesOrientation[1];
-        double zAxisData = mValuesOrientation[2];
-        //--Convert raw 0.0 ~ 1.0 sensor datad to degrees.
-        double xAngle = Math.atan(xAxisData / (Math.sqrt((yAxisData * yAxisData)) + (zAxisData * zAxisData)));
-        double yAngle = Math.atan(yAxisData / (Math.sqrt((xAxisData * xAxisData) +  (zAxisData * zAxisData))));
-        double zAngle = Math.atan(Math.sqrt((xAxisData * xAxisData) + (yAxisData * yAxisData)) / zAxisData);
-        xAngle = xAngle * 180.00;
-        yAngle = yAngle * 180.00;
-        zAngle = zAngle * 180.00;
-        xAngle = xAngle / 3.141592;
-        yAngle = yAngle / 3.141592;
-        zAngle = zAngle / 3.141592;
-
-        str = "result: " + xAngle + " " +
-                yAngle + " " +
-                zAngle;
-
-
-        return str;
-    }
 }
