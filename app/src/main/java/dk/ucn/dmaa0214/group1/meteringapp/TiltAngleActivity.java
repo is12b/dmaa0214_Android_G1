@@ -53,12 +53,12 @@ public class TiltAngleActivity extends AppCompatActivity {
             public void onSensorChanged(SensorEvent event) {
                 float[] values = fixValues(event);
 
-                int i = (int)(double)(int)((180D * Math.atan(values[0] / values[1]) / 3.1415926535897931D));
+                int i = (int)(double)(int)((182D * Math.atan(values[0] / values[1]) / 3.1415926535897931D));
 
                 int l = i - calibrateAngle;
                 int j = l;
 
-                if(l > 90){
+                if(l >= 90){
                     j = 90;
                 }
 
