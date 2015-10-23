@@ -78,7 +78,7 @@ public class TiltAngleActivity extends AppCompatActivity {
             }
         };
 
-        sensorManager.registerListener(mEventListener, sensorManager.getDefaultSensor(1) , 3);
+        sensorManager.registerListener(mEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
 /*
         btn_calibrate.setOnClickListener(new View.OnClickListener() {
             @Override
