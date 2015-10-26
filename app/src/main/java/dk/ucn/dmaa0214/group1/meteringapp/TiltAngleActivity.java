@@ -22,7 +22,6 @@ public class TiltAngleActivity extends AppCompatActivity {
     private Button btn_save;
     private TextView current_textView;
     private SensorEventListener mEventListener;
-    public static int calibrateAngle;
 
 
     @Override
@@ -45,7 +44,6 @@ public class TiltAngleActivity extends AppCompatActivity {
 
 
         btn_save = (Button) findViewById(R.id.angle_button_save);
-        //btn_calibrate = (Button) findViewById(R.id.angle_button_calibrate);
         current_textView = (TextView) findViewById(R.id.angle_textview_current);
 
         mEventListener = new SensorEventListener() {
@@ -55,7 +53,7 @@ public class TiltAngleActivity extends AppCompatActivity {
 
                 int i = (int)(double)(int)((182D * Math.atan(values[0] / values[1]) / 3.1415926535897931D));
 
-                int l = i - calibrateAngle;
+                int l = i;
                 int j = l;
 
                 if(l >= 90){
@@ -79,15 +77,7 @@ public class TiltAngleActivity extends AppCompatActivity {
         };
 
         sensorManager.registerListener(mEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
-/*
-        btn_calibrate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TiltAngleActivity.this, Calibrate.class);
-                startActivity(intent);
-            }
-        });
-*/
+
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -34,10 +34,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="dk.ucn.dmaa0214.group1.meteringapp.MainActivity" />
         </activity>
-        <activity
-            android:name=".Calibrate"
-            android:label="@string/title_activity_calibrate" >
-        </activity>
     </application>
 
 </manifest>
