@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MålingsApp</string>
+    <string name="action_settings">Indstillinger</string>
+    <string name="angle">Hældning</string>
+    <string name="angle_button_save">Gem</string>
+    <string name="lux_lightsensor_not_available">Lys Sensor er ikke tilgængelig</string>
+    <string name="lux_reset_button">Nulstil</string>
+    <string name="lux_save_button">Gem max</string>
+    <string name="main_angle">Målt hældning: 0</string>
+    <string name="main_angle_button">Mål hældning</string>
+    <string name="main_angle_formatted">Målt hældning: %1$s</string>
+    <string name="main_lux">Målt lux: 0</string>
+    <string name="main_lux_button">Mål lux</string>
+    <string name="main_lux_formatted">Målt lux: %1$s</string>
+    <string name="title_activity_lux">Lux måler</string>
+    <string name="title_activity_tilt_angle">Hældningsmåler</string>
+</resources>
