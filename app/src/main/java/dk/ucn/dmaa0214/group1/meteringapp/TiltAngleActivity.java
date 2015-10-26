@@ -12,6 +12,7 @@ public class TiltAngleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tilt_angle);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 }
